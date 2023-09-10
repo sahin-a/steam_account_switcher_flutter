@@ -11,15 +11,20 @@ class AccountItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      splashColor: Colors.red,
       borderRadius: BorderRadius.circular(14),
       child: Container(
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://static.wikia.nocookie.net/rockstargamescompany/images/a/a3/Roman_Bellic.jpg/revision/latest?cb=20130122105711"),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: SizedBox.fromSize(
+                  size: const Size.fromRadius(32),
+                  child: Image.network(
+                    account.avatarUri,
+                    isAntiAlias: true,
+                    fit: BoxFit.cover,
+                  )),
             ),
             Container(width: 20),
             Column(
