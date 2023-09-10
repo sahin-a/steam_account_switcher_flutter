@@ -1,44 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:steam_account_switcher_flutter/switcher/domain/SwitcherService.dart';
+import 'package:steam_account_switcher_flutter/switcher/ui/components/AccountList.dart';
 
 void main() {
   runApp(const MyApp());
-}
-
-class Account {
-  final String accountName;
-  final String userName;
-  final DateTime lastLogin;
-  final int level;
-
-  Account(
-      {required this.accountName,
-      required this.userName,
-      required this.lastLogin,
-      required this.level});
-}
-
-class SwitcherService {
-  List<Account> retrieveAccounts() {
-    return [
-      Account(
-          accountName: "sahingithub",
-          userName: "sahin-a",
-          lastLogin: DateTime.now(),
-          level: 200),
-      Account(
-          accountName: "romanios",
-          userName: "bekds",
-          lastLogin: DateTime.now(),
-          level: 888),
-      Account(
-          accountName: "steve_jobs",
-          userName: "Steve the Master",
-          lastLogin: DateTime.now(),
-          level: 500),
-    ];
-  }
 }
 
 class MyApp extends StatelessWidget {
@@ -89,85 +54,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class AccountList extends StatelessWidget {
-  final List<Account> accounts;
-
-  const AccountList({super.key, required this.accounts});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
-      itemCount: accounts.length,
-      itemBuilder: (BuildContext context, int index) {
-        final item = accounts[index];
-        return AccountItem(
-            accountName: item.accountName,
-            userName: item.userName,
-            lastLogin: item.lastLogin,
-            level: item.level);
-      },
-    ));
-  }
-}
-
-class AccountItem extends StatelessWidget {
-  final String accountName;
-  final String userName;
-  final DateTime lastLogin;
-  final int level;
-
-  const AccountItem(
-      {super.key,
-      required this.accountName,
-      required this.userName,
-      required this.lastLogin,
-      required this.level});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      splashColor: Colors.red,
-      borderRadius: BorderRadius.circular(14),
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://static.wikia.nocookie.net/rockstargamescompany/images/a/a3/Roman_Bellic.jpg/revision/latest?cb=20130122105711"),
-            ),
-            Container(margin: const EdgeInsets.only(left: 20)),
-            Column(
-              children: [
-                Text(accountName),
-                Text(userName),
-              ],
-            ),
-            const Spacer(),
-            Text(lastLogin.toIso8601String()),
-            const Spacer(),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      color: Colors.blueAccent,
-                      width: 3,
-                      strokeAlign: BorderSide.strokeAlignInside)),
-              alignment: Alignment.center,
-              child: Text(level.toString()),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
